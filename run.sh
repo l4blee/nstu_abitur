@@ -1,0 +1,1 @@
+npm --prefix ./build/ run start
