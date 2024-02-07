@@ -20,7 +20,10 @@ npm --prefix ./svelte/ run build
 mkdir ./build/
 cp -r ./svelte/build ./build/frontend
 cp -r ./express/build/* ./build
-cp ./express/.env ./build
+
+if [ ! -f "./express/.env"]; then
+    cp ./express/.env ./build
+fi
 
 cp ./express/package.json ./build
 npm --prefix ./build/ install --omit=dev
