@@ -6,13 +6,15 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: sudo docker build . --file Dockerfile --tag nstu_abitur
-  run:
-    runs-on: self-hosted
-    steps:
-    - name: Run 
-      run: sudo docker run -d -p 5000:5000 -e PORT=5000 nstu_abitur
+      run: sudo docker build . --file Dockerfile --tag l4blee/nstu_abitur:latest &&
+        sudo docker push image push l4blee/nstu_abitur:latest
+  # run:
+  #   needs: build
+  #   runs-on: self-hosted
+  #   steps:
+  #   - name: Run 
+  #     run: sudo docker run -d -p 5000:5000 -e PORT=5000 nstu_abitur

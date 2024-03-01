@@ -21,7 +21,7 @@ mkdir ./build/
 cp -r ./svelte/build ./build/frontend
 cp -r ./express/build/* ./build
 
-if [ ! -f "./express/.env"]; then
+if [ -f "./express/.env"]; then
     cp ./express/.env ./build
 fi
 
