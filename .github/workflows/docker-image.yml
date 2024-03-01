@@ -33,7 +33,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   run:
-    # needs: build
+    needs: build
     runs-on: self-hosted
     environment: nstu_abitur
     steps:
