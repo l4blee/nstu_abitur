@@ -42,6 +42,14 @@ jobs:
     runs-on: ubuntu-latest
     environment: nstu_abitur
     steps:
+      - name: Pull Docker image locally
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: docker pull ${{ github.repository_owner }}/nstu_abitur:main
       - name: Stop existing Docker containers
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -53,15 +61,7 @@ jobs:
             if [ ! "$(docker ps -a | grep ${{ github.repository_owner }}/nstu_abitur:* | awk '{ print $1 }')" = '' ]; 
             then 
               docker rm $(docker kill $(docker ps -a | grep "${{ github.repository_owner }}/nstu_abitur:*" | awk '{ print $1 }'))
-            fi            
-      - name: Pull Docker image locally
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: 22
-          script: docker pull ${{ github.repository_owner }}/nstu_abitur:main
+            fi
       - name: Run fresh Docker image
         uses: appleboy/ssh-action@v1.0.3
         with:
