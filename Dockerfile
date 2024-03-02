@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 node:21.6.1-alpine
+FROM node:21.6.1-alpine
 
 RUN apk update && apk upgrade
 
