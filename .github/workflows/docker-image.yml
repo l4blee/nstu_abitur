@@ -50,12 +50,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          script: RUNNING=$(
-              docker ps -a | 
-              grep "${{ github.repository_owner }}/nstu_abitur:*" | 
-              awk '{ print $1 }'
-            ) &&
-            echo "RUNNING=$RUNNING" >> $GITHUB_OUTPUT
+          script: echo "RUNNING=$(docker ps -a | grep "${{ github.repository_owner }}/nstu_abitur:*" | awk '{ print $1 }')" >> "$GITHUB_OUTPUT"
       - name: Stop existing Docker containers
         if: steps.check.outputs.RUNNING != ''
         uses: appleboy/ssh-action@v1.0.3
