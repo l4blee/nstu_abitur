@@ -38,6 +38,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   run:
+    name: Pull image and Run server on RPi
     needs: build
     runs-on: ubuntu-latest
     environment: nstu_abitur
@@ -58,9 +59,9 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
           script: |
-            if [ ! "$(docker ps -a | grep ${{ github.repository_owner }}/nstu_abitur:* | awk '{ print $1 }')" = '' ]; 
+            if [ ! "$(docker ps -aq)" = '' ]; 
             then 
-              docker rm $(docker kill $(docker ps -a | grep "${{ github.repository_owner }}/nstu_abitur:*" | awk '{ print $1 }'))
+              docker rm $(docker kill $(docker ps -aq))
             fi
       - name: Run fresh Docker image
         uses: appleboy/ssh-action@v1.0.3
