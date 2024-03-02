@@ -8,13 +8,12 @@ dotenv.config();
 
 const app: Express = express();
 
-app.use(handler)
-
-app.get('/', (req, res) => {
-    return res
-           .status(400)
-           .send('Hello world!');
+app.use((req, _, next) => {
+    console.log(`[${new Date().toUTCString()}] "${req.method} HTTP/${req.httpVersion}" @ ${req.hostname} ← ${req.ip} || ${req.path}`);
+    next();
 })
+
+app.use(handler)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is now running @port[${process.env.PORT}]`);
