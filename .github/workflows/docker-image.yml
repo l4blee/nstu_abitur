@@ -61,7 +61,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          script: echo ${{ steps.check.outputs.RUNNING }} && docker rm $(
+          script: docker rm $(
                     docker kill $(
                       docker ps -a | 
                       grep "${{ github.repository_owner }}/nstu_abitur:*" | 
@@ -75,7 +75,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          script: docker pull ${{ github.repository_owner }}/nstu_abitur:main
+          script: echo ${{ steps.check.outputs.RUNNING }} &&  docker pull ${{ github.repository_owner }}/nstu_abitur:main
       - name: Run fresh Docker image
         uses: appleboy/ssh-action@v1.0.3
         with:
