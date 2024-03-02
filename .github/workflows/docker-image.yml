@@ -42,7 +42,22 @@ jobs:
     runs-on: ubuntu-latest
     environment: nstu_abitur
     steps:
+      - name: Check if any containers are Running
+        id: check
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: RUNNING=$(
+              docker ps -a | 
+              grep "${{ github.repository_owner }}/nstu_abitur:*" | 
+              awk '{ print $1 }'
+            )
+            echo "RUNNING=$RUNNING" >> $GITHUB_AAA
       - name: Stop existing Docker containers
+        if: steps.check.outputs.RUNNING != ''
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -50,12 +65,12 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
           script: docker rm $(
-            docker kill $(
-                docker ps | 
-                grep "${{ github.repository_owner }}/nstu_abitur:*" | 
-                awk '{ print $1 }'
-              )
-            )
+                    docker kill $(
+                      docker ps -a | 
+                      grep "${{ github.repository_owner }}/nstu_abitur:*" | 
+                      awk '{ print $1 }'
+                    )
+                  )
       - name: Pull Docker image locally
         uses: appleboy/ssh-action@v1.0.3
         with:
