@@ -1,5 +1,6 @@
 **/node_modules
 **/build/
+svelte/0
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

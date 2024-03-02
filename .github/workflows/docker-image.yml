@@ -34,13 +34,22 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
   run:
     needs: build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     environment: nstu_abitur
     steps:
-    - name: Check Docker image locally
-      run: EXIST=$(sudo docker inspect l4blee/nstu_abitur:main > /dev/null 2>&1 && echo true || echo false)
-    - name: Pull Docker image 
-      if: ${{ env.EXIST }}
-      run: sudo docker pull ${{ github.repository_owner }}/nstu_abitur:main
-    - name: Run server
-      run: sudo docker run --platform linux/amd64 -d -p 5000:5000 -e PORT=${{ vars.PORT }} ${{ github.repository_owner }}/nstu_abitur:main
+      - name: Pull Docker image locally
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: docker pull ${{ github.repository_owner }}/nstu_abitur:main
+      - name: Run Docker image
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: docker run -d --expose ${{ vars.PORT }} -p ${{ vars.PORT }}:${{ vars.PORT }} -e PORT=${{ vars.PORT }} ${{ github.repository_owner }}/nstu_abitur:main

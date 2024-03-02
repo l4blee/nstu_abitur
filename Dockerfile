@@ -1,19 +1,24 @@
-FROM node:21.6.1-alpine
+FROM --platform=linux/arm64 node:21.6.1-alpine
 
 RUN apk update && apk upgrade
 
 WORKDIR /nstu_abitur/
 
 # Move source files and build the project
-COPY ./express ./express
-COPY ./svelte ./svelte
-COPY ./build.sh ./
-RUN sh build.sh
+COPY ./express /nstu_abitur/express
+COPY ./svelte /nstu_abitur/svelte
+ADD ./build.sh /nstu_abitur/
 
-# Move everything to workdir and purge
+# RUN cd ./svelte && ls -d */ && sleep 5
+
+RUN sh /nstu_abitur/build.sh
+
+# Remove everything excess
+RUN rm -rf /nstu_abitur/express /nstu_abitur/svelte
+RUN rm -f /nstu_abitur/build.sh
+
+# Move build to root and purge
 RUN mv ./build/* ./ 
-RUN rm -rf ./build ./express ./svelte build.sh
-
-EXPOSE 5000
+RUN rm -rf /nstu_abitur/build
 
 CMD node index.js
