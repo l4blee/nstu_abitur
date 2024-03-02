@@ -29,5 +29,4 @@ npm --prefix ./build/ install
 echo Cleaning up
 
 rm -rf ./express/build
-rm -rf ./express/node
 rm -rf ./svelte/build
