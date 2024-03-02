@@ -54,8 +54,8 @@ jobs:
               docker ps -a | 
               grep "${{ github.repository_owner }}/nstu_abitur:*" | 
               awk '{ print $1 }'
-            )
-            echo "RUNNING=$RUNNING" >> $GITHUB_ENV
+            ) &&
+            echo "RUNNING=$RUNNING" >> $GITHUB_OUTPUT
       - name: Stop existing Docker containers
         if: steps.check.outputs.RUNNING != ''
         uses: appleboy/ssh-action@v1.0.3
