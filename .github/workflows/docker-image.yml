@@ -41,7 +41,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment: nstu_abitur
+    env:
+      RUNNING: 'non-empty'
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
       - name: Check if any containers are Running
         id: check
         uses: appleboy/ssh-action@v1.0.3
@@ -50,7 +54,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          script: echo "RUNNING=$(docker ps -a | grep "${{ github.repository_owner }}/nstu_abitur:*" | awk '{ print $1 }')" >> "$GITHUB_OUTPUT"
+          script: export RUNNING=$(docker ps -a | grep "${{ github.repository_owner }}/nstu_abitur:*" | awk '{ print $1 }')
       - name: Stop existing Docker containers
         if: steps.check.outputs.RUNNING != ''
         uses: appleboy/ssh-action@v1.0.3
