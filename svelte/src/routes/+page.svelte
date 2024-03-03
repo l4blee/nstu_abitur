@@ -24,7 +24,7 @@
                 </a>
                 <div class='absolute flex bottom-[-1.5rem] bg-white text-gray-400 rounded-full p-2 h-12 w-[70%] shadow-lg items-center left-0 right-0 mx-auto'>
                     <span class='icon text-black mr-2'>search</span>
-                    <span class='font-mont'>Поиск</span>
+                    <input class='font-mont' placeholder="Поиск"/>
                 </div>
             </div>
     
@@ -145,7 +145,8 @@
                     <h2 class="font-bold">Режим работы:
                         <span class="font-normal">Понедельник-Пятница 09:00-18:00</span></h2>
                     <h2 class="font-bold">Почтовый адрес для отправки документов:<br/>
-                        <span class="font-normal">630073, Новосибирск, проспект Карла Маркса, 20, 2 корпус, 1 этаж. Приемная комиссия НГТУ НЭТИ</span></h2>
+                        <a href='geo:124.028582,-29.201930' class="font-normal underline">630073, Новосибирск, проспект Карла Маркса, 20, 2 корпус, 1 этаж. Приемная комиссия НГТУ НЭТИ</a>
+                    </h2>
                     <h2 class="font-bold">Телефон:
                         <a href="tel:+73833195999" class="font-normal underline">+73833195999</a></h2>
                     <h2 class="font-bold">E-mail:
@@ -176,6 +177,4 @@
             </a>
             <img class='absolute right-[-35px] bottom-[-35px]' src={touch} alt='touch'/>
         </div>
-        <!-- <div class='mt-10 lg:mt-16 px-2 mx-auto'>
-        </div> -->
     </div>
