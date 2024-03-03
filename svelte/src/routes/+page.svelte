@@ -19,8 +19,8 @@
                     bg-[url("$lib/images/nstu_bg_big.png")] lg:bg-[url("$lib/images/nstu_bg.png")]'>
             <!-- Navigation block (small screens) -->
             <div class='block lg:hidden relative h-full'>
-                <a href='https://enrollee.nstu.ru/' class='flex rounded-full bg-white h-14 w-14 font-mont text-xl font-bold mt-5 mr-5 ml-auto items-center justify-center'>
-                    ЛК
+                <a href='https://enrollee.nstu.ru/' class='icon text-gray-500 flex rounded-full bg-white h-14 w-14 font-mont text-4xl mt-5 mr-5 ml-auto items-center justify-center'>
+                    person
                 </a>
                 <div class='absolute flex bottom-[-1.5rem] bg-white text-gray-400 rounded-full p-2 h-12 w-[70%] shadow-lg items-center left-0 right-0 mx-auto'>
                     <span class='icon text-black mr-2'>search</span>
