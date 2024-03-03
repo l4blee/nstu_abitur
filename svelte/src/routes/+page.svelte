@@ -125,7 +125,7 @@
                     <h1 class="text-2xl lg:text-4xl font-bold">Лига абитуриентов. Первые</h1>
                     <h2 class="text-xl lg:text-2xl px-2 lg:p-0 lg:mt-2">Участвуй в соревнованиях и получай дополнительные баллы при поступлении!</h2>
             </span>
-            <a href="https://league.nstu.ru/" class='mt-2 lg:m-0 shadow-lg w-fit rounded-xl lg:rounded-3xl'>
+            <a href="https://league.nstu.ru/" class='mt-2 lg:m-0 lg:ml-5 shadow-lg w-fit rounded-xl lg:rounded-3xl hover:scale-[1.025] transition-all duration-300'>
                     <img class='block' src={league} alt="league"/>
             </a>
         </div>
@@ -164,15 +164,18 @@
             <DocsBtn href="https://nstu.ru/public_files/6/enrollee/spravka.pdf">Образец справки для поступления по отдельной квоте</DocsBtn>
             <DocsBtn href="https://nstu.ru/entrance/answers">Задать вопрос</DocsBtn>
         </div>
-    
-        <div class='mt-10 lg:mt-16 px-2 mx-auto'>
+        
+        <div class='flex relative w-fit mx-auto mt-10 lg:mt-16'>
             <a href="https://enrollee.nstu.ru/" 
-                class="relative border-[3px] border-orange-400 text-orange-400 px-7 py-3 
+                class="mx-auto
+                        border-[3px] border-orange-400 text-orange-400 px-7 py-3 
                         lg:px-10 lg:py-5 lg:text-2xl
                         text-xl w-fit rounded-full font-bold font-mont 
                         transition-all duration-300 hover:scale-110 shadow-xl">
                 Подать документы
-                <img class='absolute right-[-35px] bottom-[-35px]' src={touch} alt='touch'/>
             </a>
+            <img class='absolute right-[-35px] bottom-[-35px]' src={touch} alt='touch'/>
         </div>
+        <!-- <div class='mt-10 lg:mt-16 px-2 mx-auto'>
+        </div> -->
     </div>
